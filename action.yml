@@ -31,7 +31,6 @@ runs:
         java-version: '20'
     - name: "Print inputs"
       run: |
-        echo "Test SimpleLocalize"
         echo "command: ${{ inputs.command }}"
         echo "cli-version: ${{ inputs.cli-version }}"
         echo "args: ${{ inputs.args }}"
