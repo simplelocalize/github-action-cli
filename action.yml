@@ -2,56 +2,44 @@ name: 'SimpleLocalize'
 description: 'Manage localization files with SimpleLocalize Github Action'
 author: "SimpleLocalize"
 branding:
-  icon: 'download-cloud'
+  icon: 'globe'
   color: 'blue'
 inputs:
   command:
-    description: 'Choose a command'
+    description: 'Choose a CLI command to execute. Commands: https://simplelocalize.io/docs/cli/get-started/'
     required: true
     default: 'status'
   cli-version:
-    description: 'Choose a command'
+    description: 'Choose a CLI version. Versions: https://github.com/simplelocalize/simplelocalize-cli/releases'
     required: true
-    default: 'status'
+    default: '2.2.0'
   api-key:
     description: 'Project API Key'
     required: false
-    default: ''
   download-path:
-    description: 'Where files should be downloaded'
+    description: 'Where files should be downloaded, e.g.: ./i18n/messages.json, ./i18n/messages/{lang}.json, ./i18n/messages/{lang}/{ns}.json'
     required: false
-    default: './messages.json'
   download-format:
-    description: 'Choose a localization files format'
+    description: 'Choose a localization files format. Formats: https://simplelocalize.io/docs/general/file-formats/'
     required: false
-    default: 'multi-language-json'
-  download-options:
-    description: 'Choose additional download options'
-    required: false
-    default: ''
   upload-path:
-    description: 'Which files should be uploaded'
+    description: 'Which files should be uploaded, e.g.: ./i18n/messages.json, ./i18n/messages/{lang}.json, ./i18n/messages/{lang}/{ns}.json'
     required: false
-    default: './messages.json'
   upload-format:
-    description: 'Choose a localization files format'
+    description: 'Choose a localization files format. Formats: https://simplelocalize.io/docs/general/file-formats/'
     required: false
-    default: 'multi-language-json'
-  upload-options:
-    description: 'Choose additional upload options'
-    required: false
-    default: ''
-  customer-ids:
-    description: 'Download translations for given customerIds'
-    required: false
-    default: ''
   args:
-    description: 'Additional arguments'
+    description: 'Custom arguments for the CLI command'
     required: false
     default: ''
 runs:
   using: 'composite'
   steps:
+    - name: "Setup Java"
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '20'
     - name: "Print inputs"
       run: |
         echo "Test SimpleLocalize"
@@ -68,16 +56,19 @@ runs:
         echo "upload-format: ${{ inputs.upload-format }}"
         echo "args: ${{ inputs.args }}"
       shell: bash
-    - name: "Setup Java"
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '20'
     - name: "Download SimpleLocalize CLI"
       run: "curl -o simplelocalize.jar https://get.simplelocalize.io/binaries/${{ inputs.cli-version }}/simplelocalize-cli-${{ inputs.cli-version }}.jar"
       shell: bash
     - name: "Execute SimpleLocalize CLI Command"
       run: |
+        if [[ "${{ inputs.command }}" = "download" ]]
+        then
+          java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.args }} --download-path ${{ inputs.download-path }} --download-format ${{ inputs.download-format }}
+        elif [[ "${{ inputs.command }}" = "upload" ]]
+        then
+          java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.args }} --upload-path ${{ inputs.upload-path }} --upload-format ${{ inputs.upload-format }}
+        else
           java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.args }}
+        fi
       shell: bash
 
