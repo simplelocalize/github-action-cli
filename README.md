@@ -1,6 +1,7 @@
 # SimpleLocalize GitHub Action
 
 Action installs, configures, and runs the SimpleLocalize CLI with the version, command, and arguments of your choice.
+By default, SimpleLocalize CLI tries to find the configuration file in the current directory (`./simplelocalize.yml`).
 
 Learn more: https://simplelocalize.io/docs/cli/get-started/
 
@@ -32,7 +33,7 @@ The arguments for the command. Default `""`.
 
 Example: `--uploadPath ./translations/{lang}.json --uploadFormat single-language-json --dryRun`
 
-# Examples of usage
+# Example usage
 
 The workflow below will upload translations, auto-translate them,
 download translations, publish them and pull them to the hosting resources.
