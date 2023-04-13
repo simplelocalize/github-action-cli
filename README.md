@@ -50,34 +50,34 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Upload translations
-        uses: simplelocalize/github-action@v1
+        uses: simplelocalize/github-actions-cli@v1
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'upload'
           cli-version: '2.2.0'
           args: '--uploadPath ./translations/{lang}.json --uploadFormat single-language-json --dryRun'
       - name: Auto-translate project
-        uses: simplelocalize/github-action@v1
+        uses: simplelocalize/github-actions-cli@v1
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'auto-translate'
           cli-version: '2.2.0'
       - name: Download translations
-        uses: simplelocalize/github-action@v1
+        uses: simplelocalize/github-actions-cli@v1
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'download'
           cli-version: '2.2.0'
           args: '--downloadPath ./translations/{lang}.json --downloadFormat single-language-json'
       - name: Publish translations
-        uses: simplelocalize/github-action@v1
+        uses: simplelocalize/github-actions-cli@v1
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'publish'
           cli-version: '2.2.0'
           args: '--environment latest'
       - name: Pull translations
-        uses: simplelocalize/github-action@v1
+        uses: simplelocalize/github-actions-cli@v1
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'pull'

@@ -1,4 +1,4 @@
-name: 'Setup SimpleLocalize CLI'
+name: 'Invoke SimpleLocalize CLI command'
 description: 'Manage localization files with SimpleLocalize Github Action'
 author: "SimpleLocalize"
 branding:
