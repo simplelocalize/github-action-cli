@@ -45,6 +45,39 @@ inputs:
     description: 'Download translations for given customerIds'
     required: false
     default: ''
+  args:
+    description: 'Additional arguments'
+    required: false
+    default: ''
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: 'composite'
+  steps:
+    - name: "Print inputs"
+      run: |
+        echo "Test SimpleLocalize"
+        echo "command: ${{ inputs.command }}"
+        echo "cli-version: ${{ inputs.cli-version }}"
+        if [ -z "${{ inputs.api-key }}" ]; then
+          echo "api-key: [empty]"
+        else
+          echo "api-key: [hidden]"
+        fi
+        echo "download-path: ${{ inputs.download-path }}"
+        echo "download-format: ${{ inputs.download-format }}"
+        echo "upload-path: ${{ inputs.upload-path }}"
+        echo "upload-format: ${{ inputs.upload-format }}"
+        echo "args: ${{ inputs.args }}"
+      shell: bash
+    - name: "Setup Java"
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '20'
+    - name: "Download SimpleLocalize CLI"
+      run: "https://get.simplelocalize.io/binaries/${{ inputs.cli-version }}/simplelocalize-cli-${{ inputs.cli-version }}.jar"
+      shell: bash
+    - name: "Execute SimpleLocalize CLI Command"
+      run: |
+          java -jar simplelocalize-cli-${{ inputs.cli-version }}.jar ${{ inputs.command }} ${{ inputs.args }}
+      shell: bash
+
