@@ -16,18 +16,7 @@ inputs:
   api-key:
     description: 'Project API Key'
     required: false
-  download-path:
-    description: 'Where files should be downloaded, e.g.: ./i18n/messages.json, ./i18n/messages/{lang}.json, ./i18n/messages/{lang}/{ns}.json'
-    required: false
-  download-format:
-    description: 'Choose a localization files format. Formats: https://simplelocalize.io/docs/general/file-formats/'
-    required: false
-  upload-path:
-    description: 'Which files should be uploaded, e.g.: ./i18n/messages.json, ./i18n/messages/{lang}.json, ./i18n/messages/{lang}/{ns}.json'
-    required: false
-  upload-format:
-    description: 'Choose a localization files format. Formats: https://simplelocalize.io/docs/general/file-formats/'
-    required: false
+    default: ''
   args:
     description: 'Custom arguments for the CLI command'
     required: false
@@ -45,30 +34,12 @@ runs:
         echo "Test SimpleLocalize"
         echo "command: ${{ inputs.command }}"
         echo "cli-version: ${{ inputs.cli-version }}"
-        if [ -z "${{ inputs.api-key }}" ]; then
-          echo "api-key: [empty]"
-        else
-          echo "api-key: [hidden]"
-        fi
-        echo "download-path: ${{ inputs.download-path }}"
-        echo "download-format: ${{ inputs.download-format }}"
-        echo "upload-path: ${{ inputs.upload-path }}"
-        echo "upload-format: ${{ inputs.upload-format }}"
         echo "args: ${{ inputs.args }}"
       shell: bash
     - name: "Download SimpleLocalize CLI"
       run: "curl -o simplelocalize.jar https://get.simplelocalize.io/binaries/${{ inputs.cli-version }}/simplelocalize-cli-${{ inputs.cli-version }}.jar"
       shell: bash
     - name: "Execute SimpleLocalize CLI Command"
-      run: |
-        if [[ "${{ inputs.command }}" = "download" ]]
-        then
-          java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.args }} --download-path ${{ inputs.download-path }} --download-format ${{ inputs.download-format }}
-        elif [[ "${{ inputs.command }}" = "upload" ]]
-        then
-          java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.args }} --upload-path ${{ inputs.upload-path }} --upload-format ${{ inputs.upload-format }}
-        else
-          java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.args }}
-        fi
+      run: "java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.args }}"
       shell: bash
 
