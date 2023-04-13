@@ -31,7 +31,7 @@ Example: `2.2.0`
 
 The arguments for the command. Default `""`.
 
-Example: `--uploadPath ./translations/{lang}.json --uploadFormat single-language-json --dryRun`
+Example: `--uploadPath ./translations/{lang}.json --uploadFormat single-language-json`
 
 # Example usage
 
