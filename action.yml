@@ -74,10 +74,10 @@ runs:
         distribution: 'temurin'
         java-version: '20'
     - name: "Download SimpleLocalize CLI"
-      run: "https://get.simplelocalize.io/binaries/${{ inputs.cli-version }}/simplelocalize-cli-${{ inputs.cli-version }}.jar"
+      run: "curl -o simplelocalize.jar https://get.simplelocalize.io/binaries/${{ inputs.cli-version }}/simplelocalize-cli-${{ inputs.cli-version }}.jar"
       shell: bash
     - name: "Execute SimpleLocalize CLI Command"
       run: |
-          java -jar simplelocalize-cli-${{ inputs.cli-version }}.jar ${{ inputs.command }} ${{ inputs.args }}
+          java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.args }}
       shell: bash
 
