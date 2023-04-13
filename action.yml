@@ -1,0 +1,50 @@
+name: 'SimpleLocalize'
+description: 'Manage localization files with SimpleLocalize Github Action'
+author: "SimpleLocalize"
+branding:
+  icon: 'download-cloud'
+  color: 'blue'
+inputs:
+  command:
+    description: 'Choose a command'
+    required: true
+    default: 'status'
+  cli-version:
+    description: 'Choose a command'
+    required: true
+    default: 'status'
+  api-key:
+    description: 'Project API Key'
+    required: false
+    default: ''
+  download-path:
+    description: 'Where files should be downloaded'
+    required: false
+    default: './messages.json'
+  download-format:
+    description: 'Choose a localization files format'
+    required: false
+    default: 'multi-language-json'
+  download-options:
+    description: 'Choose additional download options'
+    required: false
+    default: ''
+  upload-path:
+    description: 'Which files should be uploaded'
+    required: false
+    default: './messages.json'
+  upload-format:
+    description: 'Choose a localization files format'
+    required: false
+    default: 'multi-language-json'
+  upload-options:
+    description: 'Choose additional upload options'
+    required: false
+    default: ''
+  customer-ids:
+    description: 'Download translations for given customerIds'
+    required: false
+    default: ''
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
