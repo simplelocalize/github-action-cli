@@ -39,6 +39,6 @@ runs:
       run: "curl -o simplelocalize.jar https://get.simplelocalize.io/binaries/${{ inputs.cli-version }}/simplelocalize-cli-${{ inputs.cli-version }}.jar"
       shell: bash
     - name: "Execute SimpleLocalize CLI Command"
-      run: "java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.apiKey && '--apiKey' }} ${{ inputs.apiKey }} ${{ inputs.args }}"
+      run: "java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.api-key && '--apiKey' }} ${{ inputs.api-key }} ${{ inputs.args }}"
       shell: bash
 
