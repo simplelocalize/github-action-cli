@@ -4,7 +4,8 @@ Action installs, configures, and runs the SimpleLocalize CLI with the version, c
 By default, SimpleLocalize CLI tries to find the configuration file in the current directory (`./simplelocalize.yml`).
 
 Learn more: https://simplelocalize.io/docs/cli/get-started/
-Learn more: https://github.com/simplelocalize/simplelocalize-cli
+
+The GitHub Action uses SimpleLocalize CLI that can be found here: https://github.com/simplelocalize/simplelocalize-cli
 
 
 ## Inputs
