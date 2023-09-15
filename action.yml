@@ -12,7 +12,7 @@ inputs:
   cli-version:
     description: 'Choose a CLI version. Versions: https://github.com/simplelocalize/simplelocalize-cli/releases'
     required: true
-    default: '2.2.0'
+    default: '2.5.0'
   api-key:
     description: 'Project API Key'
     required: false
@@ -39,6 +39,6 @@ runs:
       run: "curl -o simplelocalize.jar https://get.simplelocalize.io/binaries/${{ inputs.cli-version }}/simplelocalize-cli-${{ inputs.cli-version }}.jar"
       shell: bash
     - name: "Execute SimpleLocalize CLI Command"
-      run: "java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.args }}"
+      run: "java -jar simplelocalize.jar ${{ inputs.command }} ${{ inputs.apiKey && '--apiKey' }} ${{ inputs.apiKey }} ${{ inputs.args }}"
       shell: bash
 
