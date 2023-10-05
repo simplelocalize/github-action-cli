@@ -29,7 +29,7 @@ Here you can find a full list of commands: https://github.com/simplelocalize/sim
 **Required** The version of the SimpleLocalize CLI to use.
 All available versions can be found here: https://github.com/simplelocalize/simplelocalize-cli/releases
 
-Example: `2.5.0`
+Example: `2.5.1`
 
 ### `args`
 
@@ -48,44 +48,54 @@ on:
   push:
     branches: [ main ]
 
+env:
+  cli-version: '2.5.1'
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Upload translations
         uses: simplelocalize/github-action-cli@v2
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'upload'
-          cli-version: '2.5.0'
-          args: '--uploadPath ./translations/{lang}.json --uploadFormat single-language-json --dryRun'
+          cli-version: ${{ env.cli-version }}
+          args: '--uploadPath ./translations/{lang}.json --uploadFormat single-language-json'
+
       - name: Auto-translate project
         uses: simplelocalize/github-action-cli@v2
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'auto-translate'
-          cli-version: '2.5.0'
+          cli-version: ${{ env.cli-version }}
+
       - name: Download translations
         uses: simplelocalize/github-action-cli@v2
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'download'
-          cli-version: '2.5.0'
+          cli-version: ${{ env.cli-version }}
           args: '--downloadPath ./translations/{lang}.json --downloadFormat single-language-json'
+
+
+
       - name: Publish translations
         uses: simplelocalize/github-action-cli@v2
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'publish'
-          cli-version: '2.5.0'
-          args: '--environment latest'
+          cli-version: ${{ env.cli-version }}
+          args: '--environment _latest'
+
       - name: Pull translations
         uses: simplelocalize/github-action-cli@v2
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'pull'
-          cli-version: '2.5.0'
-          args: "--pullPath ./translation-hosting-resources/ --environment latest --filterRegex '_index.json'"
+          cli-version: ${{ env.cli-version }}
+          args: "--pullPath ./translation-hosting-resources/ --environment _latest --filterRegex '_index.json'"
 ```
 
