@@ -37,6 +37,8 @@ The arguments for the command. Default `""`.
 
 Example: `--uploadPath ./translations/{lang}.json --uploadFormat single-language-json`
 
+Learn more about [SimpleLocalize CLI arguments](https://simplelocalize.io/docs/cli/get-started/) and [available file formats](https://simplelocalize.io/docs/general/file-formats/).
+
 # Example usage
 
 The workflow below will upload translations, auto-translate them,
