@@ -12,7 +12,7 @@ inputs:
   cli-version:
     description: 'Choose a CLI version. Versions: https://github.com/simplelocalize/simplelocalize-cli/releases'
     required: true
-    default: '2.5.0'
+    default: '2.6.0'
   api-key:
     description: 'Project API Key'
     required: false
@@ -25,7 +25,7 @@ runs:
   using: 'composite'
   steps:
     - name: "Setup Java"
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: '20'
