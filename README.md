@@ -49,7 +49,7 @@ on:
     branches: [ main ]
 
 env:
-  cli-version: '2.5.1'
+  cli-version: '2.6.0'
 
 jobs:
   build:
