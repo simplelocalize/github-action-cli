@@ -29,7 +29,7 @@ Here you can find a full list of commands: https://github.com/simplelocalize/sim
 **Required** The version of the SimpleLocalize CLI to use.
 All available versions can be found here: https://github.com/simplelocalize/simplelocalize-cli/releases
 
-Example: `2.5.1`
+Example: `2.8.0`
 
 ### `args`
 
@@ -51,7 +51,7 @@ on:
     branches: [ main ]
 
 env:
-  cli-version: '2.6.0'
+  cli-version: '2.8.0'
 
 jobs:
   build:
@@ -60,7 +60,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Upload translations
-        uses: simplelocalize/github-action-cli@v2
+        uses: simplelocalize/github-action-cli@v3
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'upload'
@@ -68,14 +68,14 @@ jobs:
           args: '--uploadPath ./translations/{lang}.json --uploadFormat single-language-json'
 
       - name: Auto-translate project
-        uses: simplelocalize/github-action-cli@v2
+        uses: simplelocalize/github-action-cli@v3
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'auto-translate'
           cli-version: ${{ env.cli-version }}
 
       - name: Download translations
-        uses: simplelocalize/github-action-cli@v2
+        uses: simplelocalize/github-action-cli@v3
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'download'
@@ -85,7 +85,7 @@ jobs:
 
 
       - name: Publish translations
-        uses: simplelocalize/github-action-cli@v2
+        uses: simplelocalize/github-action-cli@v3
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'publish'
@@ -93,7 +93,7 @@ jobs:
           args: '--environment _latest'
 
       - name: Pull translations
-        uses: simplelocalize/github-action-cli@v2
+        uses: simplelocalize/github-action-cli@v3
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'pull'
