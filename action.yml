@@ -12,7 +12,7 @@ inputs:
   cli-version:
     description: 'Choose a CLI version. Versions: https://github.com/simplelocalize/simplelocalize-cli/releases'
     required: true
-    default: '2.6.0'
+    default: '2.8.0'
   api-key:
     description: 'Project API Key'
     required: false
