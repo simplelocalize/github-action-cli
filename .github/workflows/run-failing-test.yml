@@ -1,0 +1,18 @@
+name: Execution test
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run_tests:
+    name: "Execute SimpleLocalize CLI Command"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test init
+        uses: simplelocalize/github-action-cli@v3
+        with:
+          command: '--version'
+          cli-version: '2.8.0'
