@@ -28,7 +28,7 @@ runs:
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: '20'
+        java-version: '21'
     - name: "Print inputs"
       run: |
         echo "command: ${{ inputs.command }}"
