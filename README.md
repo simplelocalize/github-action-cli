@@ -60,7 +60,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Upload translations
-        uses: simplelocalize/github-action-cli@v3
+        uses: simplelocalize/github-action-cli@v4
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'upload'
@@ -68,14 +68,14 @@ jobs:
           args: '--uploadPath ./translations/{lang}.json --uploadFormat single-language-json'
 
       - name: Auto-translate project
-        uses: simplelocalize/github-action-cli@v3
+        uses: simplelocalize/github-action-cli@v4
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'auto-translate'
           cli-version: ${{ env.cli-version }}
 
       - name: Download translations
-        uses: simplelocalize/github-action-cli@v3
+        uses: simplelocalize/github-action-cli@v4
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'download'
@@ -85,7 +85,7 @@ jobs:
 
 
       - name: Publish translations
-        uses: simplelocalize/github-action-cli@v3
+        uses: simplelocalize/github-action-cli@v4
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'publish'
@@ -93,7 +93,7 @@ jobs:
           args: '--environment _latest'
 
       - name: Pull translations
-        uses: simplelocalize/github-action-cli@v3
+        uses: simplelocalize/github-action-cli@v4
         with:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           command: 'pull'
